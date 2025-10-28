@@ -1,0 +1,125 @@
+.chat-input-container {
+  padding: 20px 30px 30px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  z-index: 10;
+}
+
+.chat-input-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.input-icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 2px solid var(--border-color);
+  color: #c77dff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1),
+    0 2px 8px var(--shadow-color, rgba(199, 125, 255, 0.2));
+}
+
+.input-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 24px var(--shadow-color, rgba(199, 125, 255, 0.4)),
+    0 4px 12px var(--shadow-color, rgba(199, 125, 255, 0.3));
+  border-color: var(--border-color);
+}
+
+.input-icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.chat-input {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
+  padding: 0 20px;
+  color: #2d3748;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--border-color);
+  box-shadow: 0 0 0 4px var(--shadow-color, rgba(199, 125, 255, 0.3)),
+    0 12px 40px var(--shadow-color, rgba(199, 125, 255, 0.25));
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.01);
+}
+
+.chat-input::placeholder {
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.send-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c77dff 50%, #9d6aff 100%);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+  box-shadow: 0 8px 32px rgba(199, 125, 255, 0.4);
+  animation: sendGlow 2s ease-in-out infinite;
+}
+
+@keyframes sendGlow {
+  0%,
+  100% {
+    box-shadow: 0 8px 32px rgba(199, 125, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 12px 48px rgba(199, 125, 255, 0.6);
+  }
+}
+
+.send-button:hover {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 16px 56px rgba(199, 125, 255, 0.6);
+}
+
+.send-button:active {
+  transform: scale(1.05) rotate(0deg);
+}
+
+.send-button svg {
+  width: 24px;
+  height: 24px;
+}

@@ -1,0 +1,89 @@
+.left-sidebar {
+  width: 70px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  gap: 15px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 2px 0 16px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #8b6bd4;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-icon:hover {
+  background: rgba(255, 255, 255, 0.6);
+  color: #c77dff;
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 8px 24px rgba(199, 125, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-icon.active {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c77dff 50%, #9d6aff 100%);
+  color: white;
+  box-shadow: 0 8px 32px rgba(199, 125, 255, 0.5);
+  animation: iconGlow 2s ease-in-out infinite;
+}
+
+@keyframes iconGlow {
+  0%,
+  100% {
+    box-shadow: 0 8px 32px rgba(199, 125, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 8px 40px rgba(199, 125, 255, 0.7);
+  }
+}
+
+.sidebar-icon svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s;
+}
+
+.sidebar-icon:hover svg {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.sidebar-icon.profile {
+  margin-top: auto;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff9eb3 0%, #f8a8c2 50%, #ffb6e0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 16px rgba(255, 182, 220, 0.4);
+  transition: all 0.3s;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(255, 182, 220, 0.6);
+}
