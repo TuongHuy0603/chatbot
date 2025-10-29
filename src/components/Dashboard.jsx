@@ -26,7 +26,7 @@ function Dashboard({ messages, isThinking }) {
       </div>
 
       {/* Metric Cards */}
-      <div className="metrics-grid">
+      {/* <div className="metrics-grid">
         {metricCards.map((card, index) => (
           <div key={index} className={`metric-card ${card.color}`}>
             <div className="metric-icon">{card.icon}</div>
@@ -36,7 +36,7 @@ function Dashboard({ messages, isThinking }) {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Chat Box */}
       <ChatBox messages={messages} isThinking={isThinking} />
