@@ -17,7 +17,7 @@ function Dashboard({ messages, isThinking }) {
       {/* Header */}
       <div className="dashboard-header">
         <div>
-          <h1 className="dashboard-title">AI Assistant Pro</h1>
+          <h1 className="dashboard-title">AI Assistant Pro - Trí Tuệ Số</h1>
           <div className="status-badge">
             <span className="status-dot"></span>
             <span>Online & Ready</span>
