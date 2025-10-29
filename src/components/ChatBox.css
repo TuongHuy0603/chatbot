@@ -3,7 +3,9 @@
   min-height: 300px;
   max-height: 600px;
   padding: 20px;
+  padding-right: 28px; /* Extra padding for scrollbar */
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -15,6 +17,45 @@
   margin-top: 20px;
   box-shadow: 0 20px 60px var(--shadow-color, rgba(199, 125, 255, 0.5)),
     0 8px 24px var(--shadow-color, rgba(199, 125, 255, 0.3));
+  scrollbar-gutter: stable;
+}
+
+/* Scrollbar styling specifically for chat-box - Using theme colors */
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  -webkit-appearance: none;
+}
+
+.chat-box::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  margin: 8px 0;
+  -webkit-appearance: none;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  transition: background 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  -webkit-appearance: none;
+  min-height: 30px;
+  /* Background color will be set dynamically by JavaScript - NO backdrop-filter for Chrome compatibility */
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+  border-color: var(--border-color);
+  box-shadow: 0 0 8px var(--shadow-color);
+  /* Background color will be set dynamically by JavaScript */
+}
+
+.chat-box::-webkit-scrollbar-corner {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .chat-messages {

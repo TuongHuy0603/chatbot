@@ -1,12 +1,21 @@
-# Stage 1: Build
-FROM node:24-alpine AS builder
+FROM node:20-alpine
 
 WORKDIR /app
+
+# Copy package files
 COPY package*.json ./
-RUN npm install
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
 COPY . .
+
+# Build the application
 RUN npm run build
 
+# Expose port
+EXPOSE 4173
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Serve built files with Vite preview
+CMD ["npm", "run", "preview"]

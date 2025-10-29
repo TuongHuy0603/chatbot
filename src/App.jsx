@@ -62,10 +62,25 @@ function AppContent() {
 
       setMessages((prev) => [...prev, aiResponse]);
       setIsThinking(false);
+
+      // Focus input sau khi state update xong
+      setTimeout(() => {
+        const input = document.getElementById("chat-input");
+        if (input) {
+          input.focus();
+        }
+      }, 100);
     } catch (error) {
       console.error("Error calling API:", error);
-      // Không fallback, giữ trạng thái thinking để user biết đang có lỗi
-      // isThinking vẫn là true
+      setIsThinking(false);
+      
+      // Focus input để user có thể gõ lại
+      setTimeout(() => {
+        const input = document.getElementById("chat-input");
+        if (input) {
+          input.focus();
+        }
+      }, 100);
     }
   };
 
@@ -82,6 +97,50 @@ function AppContent() {
     root.style.setProperty("--theme-gradient-size", theme.gradientSize);
     root.style.setProperty("--border-color", theme.border);
     root.style.setProperty("--shadow-color", `${theme.primary}60`);
+
+    // Scrollbar colors with opacity
+    const hexToRgba = (hex, opacity) => {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    };
+
+    const thumbColor = hexToRgba(theme.primary, 0.7);
+    const thumbHoverColor = hexToRgba(theme.secondary, 0.9);
+    const thumbActiveColor = hexToRgba(theme.accent, 1);
+
+    root.style.setProperty("--scrollbar-thumb", thumbColor);
+    root.style.setProperty("--scrollbar-thumb-hover", thumbHoverColor);
+    root.style.setProperty("--scrollbar-thumb-active", thumbActiveColor);
+
+    // Inject dynamic scrollbar styles for better browser compatibility
+    let styleId = "global-scrollbar-theme";
+    let styleEl = document.getElementById(styleId);
+
+    if (!styleEl) {
+      styleEl = document.createElement("style");
+      styleEl.id = styleId;
+      document.head.appendChild(styleEl);
+    }
+
+    // Dynamic styles with higher specificity - Chrome only
+    styleEl.textContent = `
+      /* Chrome scrollbar - dynamically themed */
+      ::-webkit-scrollbar-thumb {
+        background: ${thumbColor} !important;
+        background-color: ${thumbColor} !important;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: ${thumbHoverColor} !important;
+        background-color: ${thumbHoverColor} !important;
+        box-shadow: 0 0 12px ${thumbHoverColor} !important;
+      }
+      ::-webkit-scrollbar-thumb:active {
+        background: ${thumbActiveColor} !important;
+        background-color: ${thumbActiveColor} !important;
+      }
+    `;
   }, [theme]);
 
   return (

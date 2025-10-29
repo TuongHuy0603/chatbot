@@ -9,6 +9,8 @@ function ChatInput({ onSendMessage, disabled }) {
     if (message.trim() && !disabled) {
       onSendMessage(message);
       setMessage("");
+      // Keep focus on input after submit
+      e.target.querySelector('input').focus();
     }
   };
 
@@ -29,6 +31,7 @@ function ChatInput({ onSendMessage, disabled }) {
           className={`placeholder:text-lg placeholder:font-600 chat-input !w-full ${
             disabled ? "opacity-50 cursor-not-allowed" : ""
           }`}
+          id="chat-input"
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
