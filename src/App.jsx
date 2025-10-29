@@ -30,7 +30,7 @@ function AppContent() {
     setIsThinking(true);
 
     try {
-      const response = await fetch("https://api.aicrm.com.vn/api/chat", {
+      const response = await fetch("http://103.91.170.118:8000/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

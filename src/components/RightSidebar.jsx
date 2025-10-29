@@ -13,7 +13,7 @@ function RightSidebar({ onToggleChat }) {
       name: "Wanpachi",
       message: "Looking for technical support...",
       time: "5m ago",
-      avatar: "👨",
+      avatar: "/images/wanpachi.png",
     },
     {
       name: "Emma Wilson",
@@ -103,7 +103,22 @@ function RightSidebar({ onToggleChat }) {
         <div className="conversations-list">
           {conversations.map((conv, index) => (
             <div key={index} className="conversation-item">
-              <div className="conv-avatar">{conv.avatar}</div>
+              <div className="conv-avatar">
+                {conv.avatar.includes("/") ? (
+                  <img
+                    src={conv.avatar}
+                    alt={conv.name}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                    }}
+                  />
+                ) : (
+                  conv.avatar
+                )}
+              </div>
               <div className="conv-content">
                 <div className="conv-header">
                   <span className="conv-name">{conv.name}</span>
