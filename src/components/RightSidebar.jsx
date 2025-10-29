@@ -4,13 +4,13 @@ import "./RightSidebar.css";
 function RightSidebar({ onToggleChat }) {
   const conversations = [
     {
-      name: "Sarah Johnson",
+      name: "Bánh Mì",
       message: "Need help with product recomme",
       time: "2m ago",
       avatar: "👩",
     },
     {
-      name: "Mike Chen",
+      name: "Wanpachi",
       message: "Looking for technical support...",
       time: "5m ago",
       avatar: "👨",
