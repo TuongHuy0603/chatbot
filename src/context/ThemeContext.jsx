@@ -72,11 +72,11 @@ export const themes = {
     gradient:
       "radial-gradient(ellipse at center, #2a1b4d 0%, #0a0516 50%, #1a0d2e 100%)",
     gradientSize: "100% 100%",
-    primary: "#ffd700",
+    primary: "#ffea7b",
     secondary: "#ffed4e",
     tertiary: "#ffaa00",
     accent: "#ffc42a",
-    text: "#ffd700",
+    text: "#ffea7b",
     glassBg: "rgba(0, 0, 0, 0.4)",
     border: "rgba(255, 215, 0, 0.5)",
   },

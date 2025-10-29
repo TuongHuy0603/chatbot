@@ -6,4 +6,9 @@ export default defineConfig({
   server: {
     allowedHosts: ["ai.aicrm.com.vn"],
   },
+  preview: {
+    host: "0.0.0.0",
+    port: 4173,
+    strictPort: true,
+  },
 });

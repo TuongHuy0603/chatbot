@@ -144,7 +144,7 @@
 }
 
 [data-theme="dark"] .metric-badge .metric-label {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 .metrics-grid {
@@ -498,33 +498,33 @@
 
 /* Dark theme text colors - tương phản cao */
 [data-theme="dark"] .dashboard-title {
-  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffc42a 100%);
+  background: linear-gradient(135deg, #ffea7b 0%, #ffed4e 50%, #ffc42a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 [data-theme="dark"] .metric-value {
-  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  background: linear-gradient(135deg, #ffea7b 0%, #ffed4e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 [data-theme="dark"] .metric-label {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .metric-text {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .metric-number {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .panel-header h3 {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .panel-list li {
@@ -532,7 +532,7 @@
 }
 
 [data-theme="dark"] .action-btn {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .ai-message {
@@ -540,11 +540,11 @@
 }
 
 [data-theme="dark"] .quick-actions-label {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .action-pill {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 @media (max-width: 1400px) {

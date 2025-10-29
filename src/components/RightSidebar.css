@@ -354,27 +354,27 @@
 
 /* Dark theme text colors - tương phản cao */
 [data-theme="dark"] .chat-toggle-btn {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .section-header h3 {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .section-icon {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .section-icon.pink {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .section-icon.purple {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .conv-name {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .conv-time {
@@ -386,18 +386,18 @@
 }
 
 [data-theme="dark"] .progress-label span:first-child {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 [data-theme="dark"] .progress-label span:last-child {
-  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  background: linear-gradient(135deg, #ffea7b 0%, #ffed4e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 [data-theme="dark"] .capability-label {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 @media (max-width: 1400px) {

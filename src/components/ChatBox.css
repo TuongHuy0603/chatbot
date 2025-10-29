@@ -11,9 +11,10 @@
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-color);
   margin-top: 20px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 60px var(--shadow-color, rgba(199, 125, 255, 0.5)),
+    0 8px 24px var(--shadow-color, rgba(199, 125, 255, 0.3));
 }
 
 .chat-messages {
@@ -117,7 +118,7 @@
 /* Dark theme text colors - tương phản cao */
 [data-theme="dark"] .chat-message.user .message-text {
   background: rgba(255, 215, 0, 0.15);
-  color: #ffd700;
+  color: #ffea7b;
   border-color: rgba(255, 215, 0, 0.4);
 }
 
@@ -128,7 +129,7 @@
 }
 
 [data-theme="dark"] .message-time {
-  color: #ffd700;
+  color: #ffea7b;
 }
 
 .message-text.thinking {
