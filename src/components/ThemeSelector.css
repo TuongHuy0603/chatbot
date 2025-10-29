@@ -3,74 +3,118 @@
   top: 20px;
   right: 360px;
   z-index: 1000;
-  animation: slideDown 0.6s ease-out;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.theme-options {
-  display: flex;
-  gap: 10px;
-}
-
-.theme-option {
-  background: rgba(255, 255, 255, 0.4);
+.theme-toggle-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  cursor: pointer;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 16px;
-  padding: 10px 16px;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  font-size: 13px;
-  color: #6b46c1;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  min-width: 130px;
   justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.theme-option:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 12px 32px rgba(199, 125, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.theme-option.active {
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 24px rgba(199, 125, 255, 0.5);
-  background: rgba(255, 255, 255, 0.7);
-  transform: scale(1.1);
+.theme-toggle-btn:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .theme-emoji {
-  font-size: 18px;
-  animation: bounceEmoji 2s ease-in-out infinite;
+  font-size: 24px;
+  animation: float 3s ease-in-out infinite;
 }
 
-@keyframes bounceEmoji {
+@keyframes float {
   0%,
   100% {
-    transform: translateY(0) scale(1);
+    transform: translateY(0px);
   }
   50% {
-    transform: translateY(-3px) scale(1.1);
+    transform: translateY(-5px);
   }
 }
 
-.theme-name {
-  font-size: 12px;
+.pie-chart-container {
+  position: absolute;
+  top: 60px;
+  right: -45px;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pieSlideIn 0.3s ease-out;
+  overflow: visible;
+}
+
+@keyframes pieSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pie-chart {
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+  overflow: visible;
+}
+
+.pie-chart:hover {
+  transform: scale(1.05);
+}
+
+.pie-slice {
+  transition: all 0.3s ease;
+}
+
+.pie-slice:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.pie-slice.active {
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7)) brightness(1.1);
+}
+
+.pie-tooltip-new {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1001;
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 }

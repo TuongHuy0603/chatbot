@@ -13,6 +13,7 @@ export const useTheme = () => {
 export const themes = {
   blue: {
     name: "Blue Ocean",
+    emoji: "🌊",
     gradient: "linear-gradient(135deg,  rgb(139 183 255) 0%, #06b6d4 100%)",
     gradientSize: "400% 400%",
     primary: "#3b82f6",
@@ -25,6 +26,7 @@ export const themes = {
   },
   rainbow: {
     name: "Rainbow Pastel",
+    emoji: "🌈",
     gradient:
       "linear-gradient(135deg, #ffcdd2 0%, #fff9c4 17%, #c8e6c9 33%, #bbdefb 50%, #e1bee7 67%, #f0cfd6 83%, #ffcdd2 100%)",
     gradientSize: "400% 400%",
@@ -38,6 +40,7 @@ export const themes = {
   },
   pink: {
     name: "Pink Delight",
+    emoji: "🌸",
     gradient:
       "linear-gradient(135deg, #ffeef7 0%, #f0e6ff 25%, #e6f2ff 50%, #fff0f5 75%, #ffeef7 100%)",
     gradientSize: "400% 400%",
@@ -51,6 +54,7 @@ export const themes = {
   },
   peach: {
     name: "Peach Bliss",
+    emoji: "🍑",
     gradient:
       "linear-gradient(135deg, #ffece9 0%, #fff0e6 25%, #ffe9e0 50%, #fff0e6 75%, #ffece9 100%)",
     gradientSize: "400% 400%",
@@ -62,6 +66,20 @@ export const themes = {
     glassBg: "rgba(255, 255, 255, 0.35)",
     border: "rgba(255, 184, 163, 0.7)",
   },
+  dark: {
+    name: "Moonlight",
+    emoji: "🌙",
+    gradient:
+      "radial-gradient(ellipse at center, #2a1b4d 0%, #0a0516 50%, #1a0d2e 100%)",
+    gradientSize: "100% 100%",
+    primary: "#ffd700",
+    secondary: "#ffed4e",
+    tertiary: "#ffaa00",
+    accent: "#ffc42a",
+    text: "#ffd700",
+    glassBg: "rgba(0, 0, 0, 0.4)",
+    border: "rgba(255, 215, 0, 0.5)",
+  },
 };
 
 export const ThemeProvider = ({ children }) => {
@@ -72,6 +90,8 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("theme", currentTheme);
+    // Set data-theme attribute on document root
+    document.documentElement.setAttribute("data-theme", currentTheme);
   }, [currentTheme]);
 
   const changeTheme = (themeName) => {

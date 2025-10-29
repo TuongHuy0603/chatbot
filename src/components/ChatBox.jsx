@@ -12,6 +12,15 @@ function ChatBox({ messages, isThinking }) {
     scrollToBottom();
   }, [messages, isThinking]);
 
+  const formatMessage = (text) => {
+    if (!text) return "";
+    // Convert \n to actual line breaks and handle <br> tags
+    return text
+      .replace(/\\n/g, "\n")
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/&lt;br\s*\/?&gt;/gi, "\n");
+  };
+
   return (
     <div className="chat-box">
       <div className="chat-messages">
@@ -22,7 +31,9 @@ function ChatBox({ messages, isThinking }) {
           >
             <div className="message-content">
               {msg.sender === "ai" && <div className="message-avatar">🤖</div>}
-              <div className="message-text">{msg.text}</div>
+              <div className="message-text" style={{ whiteSpace: "pre-line" }}>
+                {formatMessage(msg.text)}
+              </div>
               {msg.sender === "user" && (
                 <div className="message-avatar">👤</div>
               )}

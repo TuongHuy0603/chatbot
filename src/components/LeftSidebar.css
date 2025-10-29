@@ -87,3 +87,12 @@
   transform: scale(1.1);
   box-shadow: 0 8px 24px rgba(255, 182, 220, 0.6);
 }
+
+/* Dark theme text colors - tương phản cao */
+[data-theme="dark"] .sidebar-icon {
+  color: #ffd700;
+}
+
+[data-theme="dark"] .sidebar-icon:hover {
+  color: #ffed4e;
+}

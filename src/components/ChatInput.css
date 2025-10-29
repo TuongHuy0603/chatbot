@@ -123,3 +123,23 @@
   width: 24px;
   height: 24px;
 }
+
+/* Dark theme text colors - tương phản cao */
+[data-theme="dark"] .chat-input {
+  color: #ffd700;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .chat-input::placeholder {
+  color: #ffed4e;
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .chat-input:focus {
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffd700;
+}
+
+[data-theme="dark"] .input-icon-btn {
+  color: #ffd700;
+}

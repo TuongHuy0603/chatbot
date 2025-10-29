@@ -95,6 +95,7 @@
   line-height: 1.6;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
   word-wrap: break-word;
+  white-space: pre-line;
 }
 
 .chat-message.user .message-text {
@@ -111,6 +112,23 @@
   );
   color: #2d3748;
   border-color: rgba(252, 211, 77, 0.5);
+}
+
+/* Dark theme text colors - tương phản cao */
+[data-theme="dark"] .chat-message.user .message-text {
+  background: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  border-color: rgba(255, 215, 0, 0.4);
+}
+
+[data-theme="dark"] .chat-message.ai .message-text {
+  background: rgba(255, 215, 0, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 215, 0, 0.5);
+}
+
+[data-theme="dark"] .message-time {
+  color: #ffd700;
 }
 
 .message-text.thinking {
