@@ -101,13 +101,8 @@
   --theme-accent: #ffc42a;
   --theme-text: #ffea7b;
   --theme-glass-bg: rgba(0, 0, 0, 0.4);
-  --theme-border: rgba(255, 215, 0, 0.5);
-  --theme-gradient: radial-gradient(
-    ellipse at center,
-    #2a1b4d 0%,
-    #0a0516 50%,
-    #1a0d2e 100%
-  );
+  --theme-border: rgb(109 108 108 / 25%);
+  --theme-gradient: radial-gradient(ellipse at center, rgb(109 108 108 / 25%));
   --theme-gradient-size: 100% 100%;
   --border-color: rgba(255, 215, 0, 0.5);
   --shadow-color: rgba(255, 234, 123, 0.38);

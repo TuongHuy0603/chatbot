@@ -23,7 +23,7 @@
   top: 0;
   bottom: 0;
   width: 220px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--theme-glass-bg);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
   border-right: 1px solid var(--border-color);
@@ -37,6 +37,32 @@
   gap: 12px;
 }
 
+/* Show labels inside mobile sheet */
+.sheet-sidebar .sidebar-label {
+  display: inline-block !important;
+  opacity: 1 !important;
+}
+
+.sheet-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: rgba(255,255,255,0.6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sheet-close-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.8);
+}
+
 .sheet-content[data-state="open"] .sheet-sidebar {
   transform: translateX(0);
 }
@@ -44,6 +70,9 @@
 /* Enable interactions only when open */
 .sheet-overlay[data-state="open"] { opacity: 1; pointer-events: auto; }
 .sheet-content[data-state="open"] { pointer-events: auto; }
+
+/* Dark theme overlay color tweak */
+[data-theme="dark"] .sheet-overlay { background: rgb(135 135 135 / 45%); }
 
 /* Only show on mobile */
 @media (min-width: 1024px) {

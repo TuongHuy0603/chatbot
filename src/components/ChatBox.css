@@ -158,13 +158,13 @@
 
 /* Dark theme text colors - tương phản cao */
 [data-theme="dark"] .chat-message.user .message-text {
-  background: rgba(255, 215, 0, 0.15);
+  background: rgb(39 39 39 / 25%);
   color: #ffea7b;
   border-color: rgba(255, 215, 0, 0.4);
 }
 
 [data-theme="dark"] .chat-message.ai .message-text {
-  background: rgba(255, 215, 0, 0.2);
+  background: rgb(39 39 39 / 2.5);
   color: #ffffff;
   border-color: rgba(255, 215, 0, 0.5);
 }

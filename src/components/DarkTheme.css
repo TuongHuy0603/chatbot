@@ -106,7 +106,7 @@
 /* Chat Input */
 [data-theme="dark"] .chat-input {
   color: #ffea7b !important;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgb(39 39 39 / 25%);
 }
 
 [data-theme="dark"] .chat-input::placeholder {
@@ -115,7 +115,7 @@
 }
 
 [data-theme="dark"] .chat-input:focus {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgb(39 39 39 / 25%);
   color: #ffea7b !important;
 }
 
