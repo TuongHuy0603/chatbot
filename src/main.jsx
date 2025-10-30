@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import "./styles/theme-variables.css"; // CSS variables cho tất cả themes
 import "./components/DarkTheme.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

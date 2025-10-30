@@ -89,9 +89,10 @@ export const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
+    // Chỉ cần 2 dòng code đơn giản!
     localStorage.setItem("theme", currentTheme);
-    // Set data-theme attribute on document root
     document.documentElement.setAttribute("data-theme", currentTheme);
+    // CSS sẽ tự động apply theme qua attribute selector
   }, [currentTheme]);
 
   const changeTheme = (themeName) => {

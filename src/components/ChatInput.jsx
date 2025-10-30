@@ -10,7 +10,7 @@ function ChatInput({ onSendMessage, disabled }) {
       onSendMessage(message);
       setMessage("");
       // Keep focus on input after submit
-      e.target.querySelector('input').focus();
+      e.target.querySelector("input").focus();
     }
   };
 
