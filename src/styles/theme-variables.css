@@ -1,5 +1,3 @@
-/* Tất cả CSS variables cho mỗi theme - Đơn giản, dễ hiểu! */
-
 /* ===== BLUE THEME ===== */
 [data-theme="blue"] {
   --theme-primary: #3b82f6;
@@ -27,7 +25,16 @@
   --theme-text: #5a3d5c;
   --theme-glass-bg: rgba(255, 255, 255, 0.35);
   --theme-border: rgba(255, 107, 157, 0.6);
-  --theme-gradient: linear-gradient(135deg, #ffcdd2 0%, #fff9c4 17%, #c8e6c9 33%, #bbdefb 50%, #e1bee7 67%, #f0cfd6 83%, #ffcdd2 100%);
+  --theme-gradient: linear-gradient(
+    135deg,
+    #ffcdd2 0%,
+    #fff9c4 17%,
+    #c8e6c9 33%,
+    #bbdefb 50%,
+    #e1bee7 67%,
+    #f0cfd6 83%,
+    #ffcdd2 100%
+  );
   --theme-gradient-size: 400% 400%;
   --border-color: rgba(255, 107, 157, 0.6);
   --shadow-color: rgba(255, 107, 157, 0.38);
@@ -45,7 +52,14 @@
   --theme-text: #4b3a5a;
   --theme-glass-bg: rgba(255, 255, 255, 0.4);
   --theme-border: rgba(199, 125, 255, 0.6);
-  --theme-gradient: linear-gradient(135deg, #ffeef7 0%, #f0e6ff 25%, #e6f2ff 50%, #fff0f5 75%, #ffeef7 100%);
+  --theme-gradient: linear-gradient(
+    135deg,
+    #ffeef7 0%,
+    #f0e6ff 25%,
+    #e6f2ff 50%,
+    #fff0f5 75%,
+    #ffeef7 100%
+  );
   --theme-gradient-size: 400% 400%;
   --border-color: rgba(199, 125, 255, 0.6);
   --shadow-color: rgba(255, 107, 157, 0.38);
@@ -63,7 +77,14 @@
   --theme-text: #8b6b5c;
   --theme-glass-bg: rgba(255, 255, 255, 0.35);
   --theme-border: rgba(255, 184, 163, 0.7);
-  --theme-gradient: linear-gradient(135deg, #ffece9 0%, #fff0e6 25%, #ffe9e0 50%, #fff0e6 75%, #ffece9 100%);
+  --theme-gradient: linear-gradient(
+    135deg,
+    #ffece9 0%,
+    #fff0e6 25%,
+    #ffe9e0 50%,
+    #fff0e6 75%,
+    #ffece9 100%
+  );
   --theme-gradient-size: 400% 400%;
   --border-color: rgba(255, 184, 163, 0.7);
   --shadow-color: rgba(255, 184, 163, 0.38);
@@ -81,7 +102,12 @@
   --theme-text: #ffea7b;
   --theme-glass-bg: rgba(0, 0, 0, 0.4);
   --theme-border: rgba(255, 215, 0, 0.5);
-  --theme-gradient: radial-gradient(ellipse at center, #2a1b4d 0%, #0a0516 50%, #1a0d2e 100%);
+  --theme-gradient: radial-gradient(
+    ellipse at center,
+    #2a1b4d 0%,
+    #0a0516 50%,
+    #1a0d2e 100%
+  );
   --theme-gradient-size: 100% 100%;
   --border-color: rgba(255, 215, 0, 0.5);
   --shadow-color: rgba(255, 234, 123, 0.38);
@@ -117,4 +143,3 @@
 .chat-box::-webkit-scrollbar-thumb:active {
   background: var(--scrollbar-thumb-active) !important;
 }
-

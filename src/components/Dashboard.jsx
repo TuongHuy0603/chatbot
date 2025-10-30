@@ -1,8 +1,10 @@
 import React from "react";
 import "./Dashboard.css";
 import ChatBox from "./ChatBox";
+import ChatInput from "./ChatInput";
+import ThemeSelector from "./ThemeSelector";
 
-function Dashboard({ messages, isThinking }) {
+function Dashboard({ messages, handleSendMessage, isThinking }) {
   const metricCards = [
     { icon: "💬", value: "847", label: "Messages Today", color: "blue" },
     { icon: "👥", value: "234", label: "Active Users", color: "pink" },
@@ -13,15 +15,40 @@ function Dashboard({ messages, isThinking }) {
   ];
 
   return (
-    <div className="dashboard">
-      {/* Header */}
-      <div className="dashboard-header">
-        <div>
+    <div className="dashboard ">
+      {/* Navbar header */}
+      <div className="dashboard-header" style={{ alignItems: "center" }}>
+        <div className="nav-left">
+          {/* Mobile-only sidebar toggle */}
+          <button
+            className="nav-toggle mobile-only"
+            type="button"
+            onClick={() => (
+              window.dispatchEvent(new CustomEvent("open-mobile-sidebar")), null
+            )}
+            aria-label="Open navigation"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
           <h1 className="dashboard-title">AI Assistant Pro - Trí Tuệ Số</h1>
           <div className="status-badge">
             <span className="status-dot"></span>
             <span>Online & Ready</span>
           </div>
+        </div>
+        <div>
+          <ThemeSelector inline />
         </div>
       </div>
 
@@ -40,6 +67,7 @@ function Dashboard({ messages, isThinking }) {
 
       {/* Chat Box */}
       <ChatBox messages={messages} isThinking={isThinking} />
+      <ChatInput onSendMessage={handleSendMessage} disabled={isThinking} />
     </div>
   );
 }

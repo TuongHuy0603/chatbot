@@ -77,8 +77,8 @@ export const themes = {
     tertiary: "#ffaa00",
     accent: "#ffc42a",
     text: "#ffea7b",
-    glassBg: "rgba(0, 0, 0, 0.4)",
-    border: "rgba(255, 215, 0, 0.5)",
+    glassBg: "rgb(57 57 57 / 15%)",
+    border: "rgb(57 57 57 / 15%)",
   },
 };
 
@@ -89,10 +89,8 @@ export const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    // Chỉ cần 2 dòng code đơn giản!
     localStorage.setItem("theme", currentTheme);
     document.documentElement.setAttribute("data-theme", currentTheme);
-    // CSS sẽ tự động apply theme qua attribute selector
   }, [currentTheme]);
 
   const changeTheme = (themeName) => {

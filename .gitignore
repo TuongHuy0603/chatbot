@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# deps & build
+node_modules/
+.next/
+dist/
+out/
+.turbo/
+
+# editor/tools
+.cursor/
+.vscode/
+.DS_Store
+
+# env
+.env
+.env.*

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
 import LeftSidebar from "./components/LeftSidebar";
+import MobileSidebarSheet from "./components/MobileSidebarSheet";
 import Dashboard from "./components/Dashboard";
 import RightSidebar from "./components/RightSidebar";
 import ChatInput from "./components/ChatInput";
@@ -15,6 +16,42 @@ function AppContent() {
   const [showChat, setShowChat] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
   const [conversationId] = useState(() => `conv_${Date.now()}`);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return window.innerWidth >= 1024;
+  });
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 1024;
+  });
+
+  useEffect(() => {
+    const onResize = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (!mobile) setIsSidebarOpen(true);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // Listen mobile header toggle request
+  useEffect(() => {
+    const handler = () => setIsSidebarOpen(true);
+    window.addEventListener("open-mobile-sidebar", handler);
+    return () => window.removeEventListener("open-mobile-sidebar", handler);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile && isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobile, isSidebarOpen]);
 
   const handleSendMessage = async (messageText) => {
     const userMessage = {
@@ -28,6 +65,26 @@ function AppContent() {
 
     setMessages((prev) => [...prev, userMessage]);
     setIsThinking(true);
+
+    const normalized = (messageText || "").trim().toLowerCase();
+    if (normalized.includes("wanpachi")) {
+      const aiResponse = {
+        text: "",
+        image: "/images/wanpachi.png",
+        sender: "ai",
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      };
+      setMessages((prev) => [...prev, aiResponse]);
+      setIsThinking(false);
+      setTimeout(() => {
+        const input = document.getElementById("chat-input");
+        if (input) input.focus();
+      }, 100);
+      return;
+    }
 
     try {
       const response = await fetch("https://api.aicrm.com.vn/api/chat", {
@@ -99,13 +156,24 @@ function AppContent() {
         backgroundSize: theme.gradientSize,
       }}
     >
-      <ThemeSelector />
-      <LeftSidebar />
-      <div className="flex flex-col overflow-hidden flex-1">
-        <Dashboard messages={messages} isThinking={isThinking} />
-        <ChatInput onSendMessage={handleSendMessage} disabled={isThinking} />
+      <LeftSidebar
+        isOpen={!isMobile && isSidebarOpen}
+        onToggle={() => setIsSidebarOpen((v) => !v)}
+      />
+      <div className="flex flex-col overflow-hidden flex-1 lg:px-24 px-4 container-color">
+        <Dashboard
+          messages={messages}
+          handleSendMessage={handleSendMessage}
+          isThinking={isThinking}
+        />
       </div>
-      <RightSidebar />
+      {/* Mobile Sidebar via Radix Sheet */}
+      {isMobile && (
+        <MobileSidebarSheet
+          open={isSidebarOpen}
+          onOpenChange={(v) => setIsSidebarOpen(v)}
+        />
+      )}
     </div>
   );
 }

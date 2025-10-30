@@ -35,9 +35,27 @@ function ChatBox({ messages, isThinking }) {
           >
             <div className="message-content">
               {msg.sender === "ai" && <div className="message-avatar">🤖</div>}
-              <div className="message-text" style={{ whiteSpace: "pre-line" }}>
-                {formatMessage(msg.text)}
-              </div>
+              {msg.image ? (
+                <div className="message-text !p-2 !bg-transparent !border-0">
+                  <img
+                    src={msg.image}
+                    alt="wanpachi"
+                    style={{
+                      // maxWidth: "320px",
+                      borderRadius: 16,
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+                    }}
+                    onLoad={() => scrollToBottom()}
+                  />
+                </div>
+              ) : (
+                <div
+                  className="message-text"
+                  style={{ whiteSpace: "pre-line" }}
+                >
+                  {formatMessage(msg.text)}
+                </div>
+              )}
               {msg.sender === "user" && (
                 <div className="message-avatar">👤</div>
               )}

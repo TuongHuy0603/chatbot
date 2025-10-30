@@ -5,6 +5,31 @@
   z-index: 1000;
 }
 
+/* Inline mode for placing inside navbar */
+.theme-selector.inline {
+  position: relative;
+  top: auto;
+  right: auto;
+  z-index: 2000;
+  display: inline-block;
+}
+
+.theme-selector.inline .pie-chart-container {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  top: -52px; /* center pie around button */
+  left: -52px;
+  right: auto;
+  z-index: 2001;
+  pointer-events: auto;
+}
+
+.theme-selector.inline .theme-toggle-btn {
+  position: relative;
+  z-index: 2002;
+}
+
 .theme-toggle-btn {
   width: 56px;
   height: 56px;
@@ -325,8 +350,8 @@
 
 .pie-tooltip-new {
   position: absolute;
-  top: -40px;
-  left: 50%;
+  top: 50%;
+  left: -30%;
   transform: translateX(-50%);
   white-space: nowrap;
   background: rgba(0, 0, 0, 0.85);

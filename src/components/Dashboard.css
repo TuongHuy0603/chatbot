@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 30px;
+  gap: 10px;
   animation: slideIn 0.6s ease-out;
   overflow: hidden;
 }
@@ -29,10 +29,50 @@
   align-items: flex-start;
   border-radius: 24px;
   border: 1px solid var(--border-color);
-  margin-top: 20px;
   box-shadow: 0 20px 60px var(--shadow-color, rgba(199, 125, 255, 0.5)),
     0 8px 24px var(--shadow-color, rgba(199, 125, 255, 0.3));
   padding: 30px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.nav-toggle:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 24px var(--shadow-color, rgba(0, 0, 0, 0.12));
+}
+
+/* Hide hamburger on desktop */
+@media (min-width: 1024px) {
+  .nav-toggle {
+    display: none;
+  }
+}
+
+/* Mobile-only toggle visible under 1024px */
+@media (max-width: 1023px) {
+  .nav-toggle.mobile-only {
+    display: inline-flex;
+    position: relative;
+    z-index: 2100; /* above sheet overlay */
+  }
 }
 
 .dashboard-title {

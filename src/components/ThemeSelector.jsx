@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTheme, themes } from "../context/ThemeContext";
 import "./ThemeSelector.css";
 
-function ThemeSelector() {
+function ThemeSelector({ inline = false }) {
   const { currentTheme, changeTheme } = useTheme();
   const [hoveredSlice, setHoveredSlice] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -35,15 +35,21 @@ function ThemeSelector() {
   };
 
   return (
-    <div className="theme-selector">
-      {/* Toggle Button */}
+    <div
+      className={`theme-selector ${inline ? "inline" : ""}`}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
+      {/* Toggle Button (center) */}
       <button
         className="theme-toggle-btn"
-        onClick={() => setIsOpen(!isOpen)}
         style={{
           background: currentThemeData.gradient,
           backgroundSize: currentThemeData.gradientSize,
         }}
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        type="button"
       >
         <span className="theme-emoji">{currentThemeData.emoji}</span>
       </button>

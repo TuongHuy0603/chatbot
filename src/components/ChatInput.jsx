@@ -1,8 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ChatInput.css";
 
 function ChatInput({ onSendMessage, disabled }) {
   const [message, setMessage] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
+  const [suggestionsError, setSuggestionsError] = useState("");
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchSuggestions = async () => {
+      try {
+        setIsLoadingSuggestions(true);
+        setSuggestionsError("");
+        const res = await fetch(
+          "https://api.aicrm.com.vn/suggestions/random?limit=10"
+        );
+        if (!res.ok) throw new Error("Failed to fetch suggestions");
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error("Invalid suggestions format");
+        if (isMounted) setSuggestions(data);
+      } catch (err) {
+        if (isMounted) setSuggestionsError("Không tải được gợi ý.");
+      } finally {
+        if (isMounted) setIsLoadingSuggestions(false);
+      }
+    };
+    fetchSuggestions();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +44,33 @@ function ChatInput({ onSendMessage, disabled }) {
 
   return (
     <div className="chat-input-container">
+      {/* Suggestions bubbles */}
+      <div className="suggestions-row">
+        {isLoadingSuggestions && (
+          <div className="suggestion-loading">Đang tải gợi ý...</div>
+        )}
+        {!isLoadingSuggestions && suggestionsError && (
+          <div className="suggestion-error">{suggestionsError}</div>
+        )}
+        {!isLoadingSuggestions &&
+          !suggestionsError &&
+          suggestions.map((s, idx) => (
+            <button
+              key={idx}
+              type="button"
+              className={`suggestion-bubble ${disabled ? "disabled" : ""}`}
+              onClick={() => {
+                if (!disabled && typeof s === "string" && s.trim()) {
+                  onSendMessage(s);
+                }
+              }}
+              disabled={disabled}
+              title={typeof s === "string" ? s : ""}
+            >
+              {typeof s === "string" ? s : String(s)}
+            </button>
+          ))}
+      </div>
       <form onSubmit={handleSubmit} className="chat-input-form">
         {/* <button type="button" className="input-icon-btn">
           <svg
