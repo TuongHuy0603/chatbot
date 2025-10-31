@@ -14,7 +14,11 @@
       echo "📥 Pulling latest code from GitHub..."
       git pull origin main
 
-      # Docker build đã comment - không chạy nữa
+      # echo "🏗️ Building Docker image..."
+      # docker build -t chatbot-huy .
+
+      # echo "🔧 Fixing permissions after build..."
+      # sudo chown -R $USER:$USER /var/www/chatbot  # ← SAU BUILD mới fix
 
       echo "🔄 Restarting service..."
       sudo systemctl restart chatbot_huy.service
