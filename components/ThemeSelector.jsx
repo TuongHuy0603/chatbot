@@ -52,8 +52,9 @@ function ThemeSelector({ inline = false }) {
         aria-haspopup="true"
         aria-expanded={isOpen}
         type="button"
+        suppressHydrationWarning
       >
-        <span className="theme-emoji">{currentThemeData.emoji}</span>
+        <span className="theme-emoji" suppressHydrationWarning>{currentThemeData.emoji}</span>
       </button>
 
       {/* Pie Chart */}
@@ -213,6 +214,7 @@ function ThemeSelector({ inline = false }) {
                 userSelect: "none",
                 filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.2))",
               }}
+              suppressHydrationWarning
             >
               {currentThemeData.emoji}
             </text>

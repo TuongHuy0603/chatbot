@@ -85,16 +85,23 @@ export const themes = {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState(() => {
-    if (typeof window === 'undefined') return 'dark';
-    const saved = localStorage.getItem("theme");
-    return saved ? saved : "dark";
-  });
+  const [currentTheme, setCurrentTheme] = useState('dark');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("theme", currentTheme);
-    document.documentElement.setAttribute("data-theme", currentTheme);
-  }, [currentTheme]);
+    setMounted(true);
+    const saved = localStorage.getItem("theme");
+    if (saved) {
+      setCurrentTheme(saved);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem("theme", currentTheme);
+      document.documentElement.setAttribute("data-theme", currentTheme);
+    }
+  }, [currentTheme, mounted]);
 
   const changeTheme = (themeName) => {
     setCurrentTheme(themeName);
