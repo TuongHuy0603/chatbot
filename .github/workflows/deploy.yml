@@ -19,13 +19,6 @@ jobs:
       - name: Save image to tar
         run: docker save nextjs-app -o nextjs-app.tar
 
-      - name: Debug workspace
-        run: |
-          echo "PWD: $(pwd)"
-          ls -la /github/workspace
-          ls -la
-
-      # Copy tar to /tmp to avoid permission issues and ensure readable
       - name: Move file to tmp for scp
         run: |
           sudo cp /github/workspace/nextjs-app.tar /tmp/nextjs-app.tar
