@@ -2,46 +2,47 @@ name: Deploy Next.js to Server
 
 on:
   push:
-    branches: [main] # chạy mỗi khi push lên nhánh main
+    branches: [main] # chạy khi push lên nhánh main
   workflow_dispatch: {} # cho phép chạy thủ công
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # Nếu bạn vẫn để secrets trong Environment, thêm dòng dưới:
-    # environment: SERVER_HOST
 
     steps:
+      # 🧱 1. Checkout code từ repo
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 🧱 Build Docker image của Next.js
+      # 🏗️ 2. Build Docker image Next.js
       - name: Build Docker image
         run: docker build -t nextjs-app .
 
-      # 🗂️ Lưu image thành file .tar
+      # 📦 3. Lưu image thành file .tar
       - name: Save image to tar
         run: docker save nextjs-app -o nextjs-app.tar
 
-      # 👀 Kiểm tra file tồn tại
-      - name: List files for debugging
-        run: ls -l
+      # 👀 4. Kiểm tra file trong workspace
+      - name: Check workspace files
+        run: |
+          echo "Current path: $(pwd)"
+          ls -l /github/workspace
 
-      # 🔧 Fix quyền để GitHub có thể đọc file
+      # 🔧 5. Sửa quyền đọc file để tránh lỗi permission
       - name: Fix permission for tar file
         run: chmod 644 nextjs-app.tar
 
-      # 📤 Copy image sang server qua SSH
+      # 📤 6. Copy image qua server bằng SCP
       - name: Copy image to server
-        uses: appleboy/scp-action@v0.1.7
+        uses: appleboy/scp-action@master # bản master fix lỗi tar
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "nextjs-app.tar"
+          source: "/github/workspace/nextjs-app.tar"
           target: "/home/${{ secrets.SERVER_USER }}/"
 
-      # 🚀 Deploy container trên server
+      # 🚀 7. SSH deploy container trên server
       - name: Deploy on server
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -49,7 +50,16 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            echo "🔄 Loading image..."
             docker load -i /home/${{ secrets.SERVER_USER }}/nextjs-app.tar
+
+            echo "🧹 Removing old container (if any)..."
             docker rm -f nextjs-app || true
+
+            echo "🚀 Starting new container..."
             docker run -d -p 3000:3000 --name nextjs-app nextjs-app
+
+            echo "🧼 Cleaning old images..."
             docker image prune -f
+
+            echo "✅ Deploy complete!"
