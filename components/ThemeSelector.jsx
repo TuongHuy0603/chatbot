@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState } from "react";
 import { useTheme, themes } from "@/context/ThemeContext";
@@ -54,7 +54,9 @@ function ThemeSelector({ inline = false }) {
         type="button"
         suppressHydrationWarning
       >
-        <span className="theme-emoji" suppressHydrationWarning>{currentThemeData.emoji}</span>
+        <span className="theme-emoji" suppressHydrationWarning>
+          {currentThemeData.emoji}
+        </span>
       </button>
 
       {/* Pie Chart */}

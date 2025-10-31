@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { createContext, useState, useContext, useEffect } from "react";
 
@@ -85,7 +85,7 @@ export const themes = {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState('dark');
+  const [currentTheme, setCurrentTheme] = useState("dark");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
