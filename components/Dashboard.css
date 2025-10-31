@@ -6,7 +6,6 @@
   justify-content: flex-start;
   gap: 10px;
   animation: slideIn 0.6s ease-out;
-  overflow: hidden;
 }
 
 @keyframes slideIn {
@@ -36,7 +35,6 @@
 
 .nav-left {
   display: flex;
-  align-items: center;
   gap: 16px;
 }
 

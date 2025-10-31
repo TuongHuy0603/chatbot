@@ -32,7 +32,6 @@
 .dashboard {
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
-
   border-radius: 24px;
   border: 1px solid var(--border-color);
   margin-block: 20px;
