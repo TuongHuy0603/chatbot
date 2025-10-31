@@ -19,6 +19,10 @@ jobs:
           script: |
             cd /var/www/chatbot
 
+            echo "🔄 Resetting local changes..."
+            git reset --hard
+            git clean -fd
+
             echo "📥 Pulling latest code from GitHub..."
             git pull origin main
 
