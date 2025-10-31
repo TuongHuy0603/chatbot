@@ -23,7 +23,7 @@ code {
     monospace;
 }
 
-/* Chrome scrollbar base styles - colors are dynamically injected by App.jsx */
+/* Chrome scrollbar base styles */
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
@@ -41,12 +41,10 @@ code {
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
   transition: all 0.3s ease;
-  /* Background color is dynamically set by JavaScript in App.jsx */
 }
 
 ::-webkit-scrollbar-thumb:hover {
   border-color: rgba(255, 255, 255, 0.5);
-  /* Background and shadow are dynamically set by JavaScript in App.jsx */
 }
 
 ::-webkit-scrollbar-corner {
@@ -59,8 +57,10 @@ code {
 .sidebar-backdrop {
   position: fixed;
   inset: 0;
-  background: #71717140; /* requested backdrop color */
+  background: #71717140;
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   z-index: 15;
 }
+
+

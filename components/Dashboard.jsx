@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import "./Dashboard.css";
 import ChatBox from "./ChatBox";
@@ -15,10 +17,10 @@ function Dashboard({ messages, handleSendMessage, isThinking }) {
   ];
 
   return (
-    <div className="dashboard ">
+    <div className="dashboard overflow-y-scroll">
       {/* Navbar header */}
       <div className="dashboard-header" style={{ alignItems: "center" }}>
-        <div className="nav-left">
+        <div className="nav-left flex-col xl:flex-row items-start xl:items-center">
           {/* Mobile-only sidebar toggle */}
           <button
             className="nav-toggle mobile-only"

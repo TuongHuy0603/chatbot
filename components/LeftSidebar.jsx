@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from "react";
 import "./LeftSidebar.css";
 
@@ -22,7 +24,7 @@ function LeftSidebar({ isOpen = true, onToggle }) {
       <div className="sidebar-item">
         <button
           type="button"
-          className={`sidebar-toggle ${isOpen ? "inside" : "edge"}`}
+          className={`sidebar-icon ${isOpen ? "inside" : "edge"}`}
           onClick={handleToggleClick}
           aria-label={
             isOpen

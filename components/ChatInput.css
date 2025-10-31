@@ -21,6 +21,14 @@
   position: relative;
   z-index: 10;
 }
+
+/* Dark theme glass and neon */
+[data-theme="dark"] .chat-input-container,
+[data-theme="dark"] .container-color {
+  background: var(--theme-glass-bg) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 20px 60px var(--shadow-color), 0 8px 24px var(--shadow-color) !important;
+}
 .dashboard {
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);

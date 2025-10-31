@@ -95,20 +95,20 @@
 
 /* ===== DARK THEME ===== */
 [data-theme="dark"] {
-  --theme-primary: #ffea7b;
-  --theme-secondary: #ffed4e;
-  --theme-tertiary: #ffaa00;
-  --theme-accent: #ffc42a;
-  --theme-text: #ffea7b;
-  --theme-glass-bg: rgba(0, 0, 0, 0.4);
-  --theme-border: rgb(109 108 108 / 25%);
-  --theme-gradient: radial-gradient(ellipse at center, rgb(109 108 108 / 25%));
+  --theme-primary: #9ca3af; /* gray-400 */
+  --theme-secondary: #6b7280; /* gray-500 */
+  --theme-tertiary: #4b5563; /* gray-600 */
+  --theme-accent: #ffea7b; /* neon yellow accent */
+  --theme-text: #e5e7eb; /* gray-200 */
+  --theme-glass-bg: rgba(24, 24, 27, 0.6);
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-gradient: rgb(10 10 10); /* solid bg, no gradient */
   --theme-gradient-size: 100% 100%;
-  --border-color: rgba(255, 215, 0, 0.5);
-  --shadow-color: rgba(255, 234, 123, 0.38);
-  --scrollbar-thumb: rgba(255, 234, 123, 0.7);
-  --scrollbar-thumb-hover: rgba(255, 237, 78, 0.9);
-  --scrollbar-thumb-active: rgba(255, 196, 42, 1);
+  --border-color: rgba(255, 255, 255, 0.12);
+  --shadow-color: rgba(255, 234, 123, 0.35);
+  --scrollbar-thumb: rgba(156, 163, 175, 0.6);
+  --scrollbar-thumb-hover: rgba(107, 114, 128, 0.8);
+  --scrollbar-thumb-active: rgba(163, 163, 163, 1);
 }
 
 /* ===== SCROLLBAR STYLES (dùng CSS variables) ===== */

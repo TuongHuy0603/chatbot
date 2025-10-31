@@ -1,4 +1,7 @@
+'use client';
+
 import React, { useRef, useEffect } from "react";
+import Image from "next/image";
 import "./ChatBox.css";
 
 function ChatBox({ messages, isThinking }) {
@@ -37,11 +40,12 @@ function ChatBox({ messages, isThinking }) {
               {msg.sender === "ai" && <div className="message-avatar">🤖</div>}
               {msg.image ? (
                 <div className="message-text !p-2 !bg-transparent !border-0">
-                  <img
+                  <Image
                     src={msg.image}
                     alt="wanpachi"
+                    width={320}
+                    height={320}
                     style={{
-                      // maxWidth: "320px",
                       borderRadius: 16,
                       boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
                     }}

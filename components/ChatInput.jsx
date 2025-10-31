@@ -1,36 +1,16 @@
+'use client';
+
 import React, { useState, useEffect } from "react";
 import "./ChatInput.css";
+import { useSuggestionsQuery } from "@/features/chat/queries";
 
 function ChatInput({ onSendMessage, disabled }) {
   const [message, setMessage] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
-  const [suggestionsError, setSuggestionsError] = useState("");
-
-  useEffect(() => {
-    let isMounted = true;
-    const fetchSuggestions = async () => {
-      try {
-        setIsLoadingSuggestions(true);
-        setSuggestionsError("");
-        const res = await fetch(
-          "https://api.aicrm.com.vn/suggestions/random?limit=10"
-        );
-        if (!res.ok) throw new Error("Failed to fetch suggestions");
-        const data = await res.json();
-        if (!Array.isArray(data)) throw new Error("Invalid suggestions format");
-        if (isMounted) setSuggestions(data);
-      } catch (err) {
-        if (isMounted) setSuggestionsError("Không tải được gợi ý.");
-      } finally {
-        if (isMounted) setIsLoadingSuggestions(false);
-      }
-    };
-    fetchSuggestions();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const {
+    data: suggestions = [],
+    isLoading: isLoadingSuggestions,
+    error: suggestionsError,
+  } = useSuggestionsQuery(10);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +30,7 @@ function ChatInput({ onSendMessage, disabled }) {
           <div className="suggestion-loading">Đang tải gợi ý...</div>
         )}
         {!isLoadingSuggestions && suggestionsError && (
-          <div className="suggestion-error">{suggestionsError}</div>
+          <div className="suggestion-error">Không tải được gợi ý.</div>
         )}
         {!isLoadingSuggestions &&
           !suggestionsError &&

@@ -553,6 +553,22 @@
   background-clip: text;
 }
 
+/* Dark cards: stronger neon accent borders/glow */
+[data-theme="dark"] .dashboard-header,
+[data-theme="dark"] .chat-box,
+[data-theme="dark"] .panels-section .panel-card,
+[data-theme="dark"] .action-pill {
+  border-color: var(--theme-accent) !important;
+  box-shadow: 0 20px 60px var(--shadow-color), 0 8px 24px var(--shadow-color);
+  background: var(--theme-glass-bg) !important;
+}
+
+/* Ensure inner panel backgrounds also go dark */
+[data-theme="dark"] .panels-section .panel-card .panel-header,
+[data-theme="dark"] .panels-section .panel-card .panel-body {
+  background: transparent !important;
+}
+
 [data-theme="dark"] .metric-value {
   background: linear-gradient(135deg, #ffea7b 0%, #ffed4e 100%);
   -webkit-background-clip: text;

@@ -1,0 +1,39 @@
+name: Deploy Next.js to Server
+
+on:
+  push:
+    branches: [main] # chỉ trigger khi push lên nhánh main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t nextjs-app .
+
+      - name: Save image to tar
+        run: docker save nextjs-app -o nextjs-app.tar
+
+      - name: Copy image to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "nextjs-app.tar"
+          target: "/home/${{ secrets.SERVER_USER }}/"
+
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            docker load -i /home/${{ secrets.SERVER_USER }}/nextjs-app.tar
+            docker rm -f nextjs-app || true
+            docker run -d -p 3000:3000 --name nextjs-app nextjs-app

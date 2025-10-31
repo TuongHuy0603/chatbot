@@ -1,0 +1,279 @@
+---
+alwaysApply: true
+---
+Cursor Rules — Next.js KISS (Tech Lead Compact)
+As a tech lead, prioritize simplicity, performance, and strict task adherence. Favor SSR over CSR unless CSR is explicitly required.
+
+Source of Truth
+Do not create MD file (no need)
+Assets Provided: Achieve pixel-perfect (±2px) fidelity to task-specific images/assets. No reuse from prior tasks.
+No Assets: Follow prompt strictly. Document assumptions in PR under "Assumptions."
+No Unsolicited UI Changes: Only refactor/improve UI if explicitly requested.
+
+UI Fidelity
+
+Spacing: Match image, use 4/8px multiples.
+Typography: Match size, weight, leading from image.
+Colors:
+
+Never use raw hex (e.g., bg-[#ABC]).
+Use semantic Tailwind tokens (e.g., bg-primary, text-primary-foreground).
+Map image colors to CSS variables in styles/globals.css, then to Tailwind.
+Fallback tokens: success #10B981, warning #F59E0B, danger #EF4444.
+
+States: Match image for hover/active/focus; default to hover:opacity-90, focus-visible:outline, ring-1 ring-white/10.
+Charts: Use Recharts with SVG <linearGradient>, match image for corners, axes, styles.
+Responsive: Prioritize desktop layout if only desktop assets provided. Breakpoints must match design.
+No UI Reuse: Avoid reusing UI from other tasks unless instructed.
+
+Acceptance Checklist (PR)
+
+Reference image: (file/URL + timestamp)
+Spacing, font, color, radius match (±2px)
+Hover/Focus/Active states match
+Chart gradients, corners, axes match
+Responsive, no overflow/scrollbars
+Semantic color tokens used
+Assumptions: (if details missing)
+
+Project Structure
+
+app/: Routes, SSR logic
+components/: Reusable UI, no data fetching
+features/<domain>/: Domain-specific UI, hooks, queries, types
+lib/: Utilities (api.ts, utils.ts, constants.ts)
+styles/globals.css: Global styles
+Use alias @/\* for paths.
+
+Data Layer
+
+Fetch Wrapper (lib/api.ts):
+
+Base URL: process.env.NEXT_PUBLIC_API_URL
+Supports JSON, credentials: 'include', cache: 'no-store'
+Throws errors with status/data
+
+React Query:
+
+Keys: ['orders'], ['orders', id]
+Default staleTime: 60–120s, adjust per use case
+
+SSR Priority: Use getServerSideProps or getStaticProps for data fetching unless CSR is required.
+
+Authentication
+
+Login: Backend sets HttpOnly + Secure cookies; no token in response.
+API Calls: Same-origin standard; cross-origin uses credentials: 'include'.
+Protected Routes: Use middleware.ts for cookie-based redirects to /login.
+Security: CSRF protection (double-submit cookies) for cross-origin requests.
+
+API Strategy
+
+Choose: standalone backend, Next.js API proxy, or all-in-one app.
+Use api() for all frontend data fetching.
+
+Styling (Tailwind, No CSS-in-JS)
+
+No styled-components/Emotion. Extend in styles/globals.css with @layer.
+Color Protocol:
+
+Define in :root (e.g., --color-primary: 24 119 242).
+Map to Tailwind in tailwind.config.js (e.g., primary: 'rgb(var(--color-primary) / <alpha-value>)').
+Use semantic classes (bg-primary, border-border); no hex.
+Task overrides: Use <body data-theme="task-123"> with CSS variables.
+
+shadcn/ui Components
+
+Reuse components/ui/\_ if 80–100% match.
+Extend via props/variants/className; update original files for new variants.
+No duplicates (e.g., Button2.tsx). Use wrappers in features/<domain>/components/.
+Naming: Keep original names (Button, Card); use semantic variants.
+Theming: Use Tailwind tokens/CSS variables.
+Justify new components in PR.
+
+Large Lists & Scroll
+
+≤ 200 items: Render normally, lazy-load media.
+200–10k items: Use virtualization (react-virtuoso or react-window + InfiniteLoader).
+Infinite Scroll: Use Intersection Observer (sentinel) or throttled onScroll.
+Media Hover: Intersection Observer for src in viewport; default <img>, mount <video> on hover.
+
+Performance
+
+LCP: ≤ 2.5s
+Bundle Size: Main page < 200KB
+DOM: < 500 nodes
+Use next/image and dynamic(import, { ssr: false }) for heavy client-only libraries.
+Charts: Use Recharts for performance.
+
+Code Style & DX
+
+TypeScript: Strict mode, explicit types, no any, no console logs.
+Size Limits: Components <150 lines, functions <50 lines.
+Classes: Use clsx or cn for dynamic classes.
+Commits: Conventional Commits (feat, fix, refactor, chore, docs). Small, focused PRs.
+
+Error, Loading, Empty States
+
+Use skeletons/spinners for loading, concise empty states.
+Wrap errors at boundaries (api.ts, server actions) with try/catch.
+
+Observability & Security
+
+Backend: Expose /healthz, /readyz; log JSON with traceId.
+Security:
+
+Cookies: HttpOnly + Secure
+Cross-site: CSRF protection (double-submit cookies)
+Validate inputs in route handlers
+Secrets in .env
+
+Monitoring: Logs/metrics for debugging/performance.
+
+Delivery & Deprecation
+
+Use feature flags with rollback plans.
+Version APIs, mark deprecated code with @deprecated in comments/CHANGELOG.
+
+Reference Snippets
+
+Chart Gradient: See chart-gradient.tsx for Recharts gradient/radius.
+Middleware: See middleware.ts for cookie-based route protection.
+Cursor Rules — Next.js KISS (Tech Lead Compact)
+As a tech lead, prioritize simplicity, performance, and strict task adherence. Favor SSR over CSR unless CSR is explicitly required.
+
+Source of Truth
+
+Assets Provided: Achieve pixel-perfect (±2px) fidelity to task-specific images/assets. No reuse from prior tasks.
+No Assets: Follow prompt strictly. Document assumptions in PR under "Assumptions."
+No Unsolicited UI Changes: Only refactor/improve UI if explicitly requested.
+
+UI Fidelity
+
+Spacing: Match image, use 4/8px multiples.
+Typography: Match size, weight, leading from image.
+Colors:
+
+Never use raw hex (e.g., bg-[#ABC]).
+Use semantic Tailwind tokens (e.g., bg-primary, text-primary-foreground).
+Map image colors to CSS variables in styles/globals.css, then to Tailwind.
+Fallback tokens: success #10B981, warning #F59E0B, danger #EF4444.
+
+States: Match image for hover/active/focus; default to hover:opacity-90, focus-visible:outline, ring-1 ring-white/10.
+Charts: Use Recharts with SVG <linearGradient>, match image for corners, axes, styles.
+Responsive: Prioritize desktop layout if only desktop assets provided. Breakpoints must match design.
+No UI Reuse: Avoid reusing UI from other tasks unless instructed.
+
+Acceptance Checklist (PR)
+
+Reference image: (file/URL + timestamp)
+Spacing, font, color, radius match (±2px)
+Hover/Focus/Active states match
+Chart gradients, corners, axes match
+Responsive, no overflow/scrollbars
+Semantic color tokens used
+Assumptions: (if details missing)
+
+Project Structure
+
+app/: Routes, SSR logic
+components/: Reusable UI, no data fetching
+features/<domain>/: Domain-specific UI, hooks, queries, types
+lib/: Utilities (api.ts, utils.ts, constants.ts)
+styles/globals.css: Global styles
+Use alias @/\* for paths.
+
+Data Layer
+
+Fetch Wrapper (lib/api.ts):
+
+Base URL: process.env.NEXT_PUBLIC_API_URL
+Supports JSON, credentials: 'include', cache: 'no-store'
+Throws errors with status/data
+
+React Query:
+
+Keys: ['orders'], ['orders', id]
+Default staleTime: 60–120s, adjust per use case
+
+SSR Priority: Use getServerSideProps or getStaticProps for data fetching unless CSR is required.
+
+Authentication
+
+Login: Backend sets HttpOnly + Secure cookies; no token in response.
+API Calls: Same-origin standard; cross-origin uses credentials: 'include'.
+Protected Routes: Use middleware.ts for cookie-based redirects to /login.
+Security: CSRF protection (double-submit cookies) for cross-origin requests.
+
+API Strategy
+
+Choose: standalone backend, Next.js API proxy, or all-in-one app.
+Use api() for all frontend data fetching.
+
+Styling (Tailwind, No CSS-in-JS)
+
+No styled-components/Emotion. Extend in styles/globals.css with @layer.
+Color Protocol:
+
+Define in :root (e.g., --color-primary: 24 119 242).
+Map to Tailwind in tailwind.config.js (e.g., primary: 'rgb(var(--color-primary) / <alpha-value>)').
+Use semantic classes (bg-primary, border-border); no hex.
+Task overrides: Use <body data-theme="task-123"> with CSS variables.
+
+shadcn/ui Components
+
+Reuse components/ui/\_ if 80–100% match.
+Extend via props/variants/className; update original files for new variants.
+No duplicates (e.g., Button2.tsx). Use wrappers in features/<domain>/components/.
+Naming: Keep original names (Button, Card); use semantic variants.
+Theming: Use Tailwind tokens/CSS variables.
+Justify new components in PR.
+
+Large Lists & Scroll
+
+≤ 200 items: Render normally, lazy-load media.
+200–10k items: Use virtualization (react-virtuoso or react-window + InfiniteLoader).
+Infinite Scroll: Use Intersection Observer (sentinel) or throttled onScroll.
+Media Hover: Intersection Observer for src in viewport; default <img>, mount <video> on hover.
+
+Performance
+
+LCP: ≤ 2.5s
+Bundle Size: Main page < 200KB
+DOM: < 500 nodes
+Use next/image and dynamic(import, { ssr: false }) for heavy client-only libraries.
+Charts: Use Recharts for performance.
+
+Code Style & DX
+
+TypeScript: Strict mode, explicit types, no any, no console logs.
+Size Limits: Components <150 lines, functions <50 lines.
+Classes: Use clsx or cn for dynamic classes.
+Commits: Conventional Commits (feat, fix, refactor, chore, docs). Small, focused PRs.
+
+Error, Loading, Empty States
+
+Use skeletons/spinners for loading, concise empty states.
+Wrap errors at boundaries (api.ts, server actions) with try/catch.
+
+Observability & Security
+
+Backend: Expose /healthz, /readyz; log JSON with traceId.
+Security:
+
+Cookies: HttpOnly + Secure
+Cross-site: CSRF protection (double-submit cookies)
+Validate inputs in route handlers
+Secrets in .env
+
+Monitoring: Logs/metrics for debugging/performance.
+
+Delivery & Deprecation
+
+Use feature flags with rollback plans.
+Version APIs, mark deprecated code with @deprecated in comments/CHANGELOG.
+
+Reference Snippets
+
+Chart Gradient: See chart-gradient.tsx for Recharts gradient/radius.
+Middleware: See middleware.ts for cookie-based route protection.

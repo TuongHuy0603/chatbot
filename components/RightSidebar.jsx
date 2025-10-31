@@ -1,4 +1,7 @@
+'use client';
+
 import React from "react";
+import Image from "next/image";
 import "./RightSidebar.css";
 
 function RightSidebar({ onToggleChat }) {
@@ -105,9 +108,11 @@ function RightSidebar({ onToggleChat }) {
             <div key={index} className="conversation-item">
               <div className="conv-avatar">
                 {conv.avatar.includes("/") ? (
-                  <img
+                  <Image
                     src={conv.avatar}
                     alt={conv.name}
+                    width={40}
+                    height={40}
                     style={{
                       width: "100%",
                       height: "100%",

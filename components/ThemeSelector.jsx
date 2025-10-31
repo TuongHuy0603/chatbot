@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState } from "react";
-import { useTheme, themes } from "../context/ThemeContext";
+import { useTheme, themes } from "@/context/ThemeContext";
 import "./ThemeSelector.css";
 
 function ThemeSelector({ inline = false }) {

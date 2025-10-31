@@ -11,11 +11,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the Next.js application
 RUN npm run build
 
 # Expose port
-EXPOSE 4173
+EXPOSE 3000
 
-# Serve built files with Vite preview
-CMD ["npm", "run", "preview"]
+# Start Next.js production server
+CMD ["npm", "run", "start"]
