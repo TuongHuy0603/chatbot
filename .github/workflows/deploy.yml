@@ -10,21 +10,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 🧱 1. Lấy source code từ repo
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 🏗️ 2. Build Docker image cho Next.js
       - name: Build Docker image
         run: docker build -t nextjs-app .
 
+      # 📦 3. Lưu image thành file .tar trong thư mục hiện tại
       - name: Save image to tar
         run: docker save nextjs-app -o nextjs-app.tar
 
+      # 👀 4. Debug kiểm tra file vừa tạo
+      - name: Debug workspace
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -la
+          if [ ! -f "nextjs-app.tar" ]; then
+            echo "❌ File nextjs-app.tar không tồn tại!"
+            exit 1
+          fi
+
+      # 🔧 5. Copy file sang /tmp để tránh lỗi permission
       - name: Move file to tmp for scp
         run: |
-          sudo cp /github/workspace/nextjs-app.tar /tmp/nextjs-app.tar
+          sudo cp nextjs-app.tar /tmp/nextjs-app.tar
           sudo chmod 666 /tmp/nextjs-app.tar
           ls -la /tmp/nextjs-app.tar
 
+      # 📤 6. Upload image qua SSH sang server
       - name: Copy image to server
         uses: appleboy/scp-action@master
         with:
@@ -36,6 +51,7 @@ jobs:
           overwrite: true
           debug: true
 
+      # 🚀 7. SSH vào server và chạy container
       - name: Deploy on server
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -44,13 +60,11 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             set -e
-            echo "Loading image..."
-            docker load -i /home/${{ secrets.SERVER_USER }}/nextjs-app.tar
-            echo "Removing old container if exists..."
+            echo "🧹 Dọn cũ và load image mới..."
+            docker load -i /home/${{ secrets.SERVER_USER }}/nextjs-app.tar || true
             docker rm -f nextjs-app || true
-            echo "Running new container..."
+            echo "🚀 Chạy container mới..."
             docker run -d -p 3000:3000 --name nextjs-app nextjs-app
-            echo "Cleaning tar..."
             rm -f /home/${{ secrets.SERVER_USER }}/nextjs-app.tar
-            docker image prune -f --force
-            echo "Deployed successfully"
+            docker image prune -f
+            echo "✅ Triển khai hoàn tất!"
