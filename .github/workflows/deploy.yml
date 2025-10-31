@@ -18,22 +18,26 @@ jobs:
       - name: Build Docker image
         run: docker build -t nextjs-app .
 
-      # 📦 3. Lưu image thành file .tar (trong thư mục hiện tại)
+      # 📦 3. Lưu image thành file .tar và fix permission
       - name: Save image to tar
-        run: docker save nextjs-app -o nextjs-app.tar
+        run: |
+          docker save nextjs-app | gzip > nextjs-app.tar.gz
+          ls -lh nextjs-app.tar.gz
 
-      # 📤 4. Copy image to server
+      # 🔑 4. Setup SSH key
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      # 📤 5. Copy image to server via SCP
       - name: Copy image to server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "nextjs-app.tar"
-          target: "/home/${{ secrets.SERVER_USER }}/"
-          overwrite: true
+        run: |
+          scp -i ~/.ssh/deploy_key nextjs-app.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/home/${{ secrets.SERVER_USER }}/
 
-      # 🚀 5. SSH deploy container trên server
+      # 🚀 6. SSH deploy container trên server
       - name: Deploy on server
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -42,7 +46,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "🔄 Loading image..."
-            docker load -i /home/${{ secrets.SERVER_USER }}/nextjs-app.tar
+            docker load -i /home/${{ secrets.SERVER_USER }}/nextjs-app.tar.gz
 
             echo "🧹 Removing old container (if any)..."
             docker rm -f nextjs-app || true
@@ -52,5 +56,8 @@ jobs:
 
             echo "🧼 Cleaning old images..."
             docker image prune -f
+
+            echo "🗑️ Removing tar file..."
+            rm -f /home/${{ secrets.SERVER_USER }}/nextjs-app.tar.gz
 
             echo "✅ Deploy complete!"
