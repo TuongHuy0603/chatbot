@@ -43,7 +43,7 @@ function Dashboard({ messages, handleSendMessage, isThinking }) {
               <line x1="3" y1="18" x2="21" y2="18" />
             </svg>
           </button>
-          <h1 className="dashboard-title">AI Assistant Pro - Trí Tuệ Số123</h1>
+          <h1 className="dashboard-title">AI Assistant Pro - Trí Tuệ Số</h1>
           <div className="status-badge">
             <span className="status-dot"></span>
             <span>Online & Ready</span>
