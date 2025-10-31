@@ -18,6 +18,9 @@ jobs:
       - name: Save image to tar
         run: docker save nextjs-app -o nextjs-app.tar
 
+      - name: Fix permission for tar file
+        run: chmod 644 nextjs-app.tar
+
       - name: Copy image to server
         uses: appleboy/scp-action@v0.1.7
         with:
