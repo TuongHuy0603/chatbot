@@ -17,7 +17,7 @@ jobs:
         run: docker build -t nextjs-app .
 
       - name: Save image to tar
-        run: docker save nextjs-app -o /github/workspace/nextjs-app.tar
+        run: docker save nextjs-app -o nextjs-app.tar
 
       - name: Debug workspace
         run: |
