@@ -2,25 +2,36 @@ name: Deploy Next.js to Server
 
 on:
   push:
-    branches: [main] # chỉ trigger khi push lên nhánh main
+    branches: [main] # chạy mỗi khi push lên nhánh main
+  workflow_dispatch: {} # cho phép chạy thủ công
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: SERVER_HOST
+    # Nếu bạn vẫn để secrets trong Environment, thêm dòng dưới:
+    # environment: SERVER_HOST
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 🧱 Build Docker image của Next.js
       - name: Build Docker image
         run: docker build -t nextjs-app .
 
+      # 🗂️ Lưu image thành file .tar
       - name: Save image to tar
         run: docker save nextjs-app -o nextjs-app.tar
 
+      # 👀 Kiểm tra file tồn tại
+      - name: List files for debugging
+        run: ls -l
+
+      # 🔧 Fix quyền để GitHub có thể đọc file
       - name: Fix permission for tar file
         run: chmod 644 nextjs-app.tar
 
+      # 📤 Copy image sang server qua SSH
       - name: Copy image to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -30,6 +41,7 @@ jobs:
           source: "nextjs-app.tar"
           target: "/home/${{ secrets.SERVER_USER }}/"
 
+      # 🚀 Deploy container trên server
       - name: Deploy on server
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -40,3 +52,4 @@ jobs:
             docker load -i /home/${{ secrets.SERVER_USER }}/nextjs-app.tar
             docker rm -f nextjs-app || true
             docker run -d -p 3000:3000 --name nextjs-app nextjs-app
+            docker image prune -f
