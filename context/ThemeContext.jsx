@@ -71,14 +71,13 @@ export const themes = {
   dark: {
     name: "Moon Light",
     emoji: "🌙",
-    // No gradient in dark mode, use solid near-black
     gradient: "rgb(10 10 10)",
     gradientSize: "100% 100%",
-    primary: "#9ca3af", // gray-400
-    secondary: "#6b7280", // gray-500
-    tertiary: "#4b5563", // gray-600
+    primary: "#9ca3af",
+    secondary: "#6b7280",
+    tertiary: "#4b5563",
     accent: "#a3a3a3",
-    text: "#e5e7eb", // gray-200
+    text: "#e5e7eb",
     glassBg: "rgba(24, 24, 27, 0.6)",
     border: "rgba(255, 255, 255, 0.08)",
   },
